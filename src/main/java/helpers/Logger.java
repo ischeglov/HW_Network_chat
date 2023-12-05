@@ -1,4 +1,4 @@
-package server;
+package helpers;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,24 +10,17 @@ public class Logger {
 
     File file = new File("/Users/imshcheglov/Desktop/JD-51 HW/7. Многопоточное и функциональное программирование/6. Курсовой проект \"Сетевой чат\"/HW_Network_chat", "file.log");
 
-    private static Logger logger;
+    public static final Logger instance = new Logger();
 
     private Logger() {}
 
-    public void setLogger(String message) {
-        System.out.println("[ " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " ]" + message);
+    public void setMessage(String message) {
+        System.out.println("[ " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " ] " + message);
 
         try (FileWriter writer = new FileWriter("file.log", true)) {
-            writer.write("[ " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " ]" + message);
+            writer.write("[ " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " ] " + message + "\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static Logger getInstance() {
-        if (logger == null) {
-            logger = new Logger();
-        }
-        return logger;
     }
 }
