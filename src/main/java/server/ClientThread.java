@@ -23,9 +23,8 @@ public class ClientThread implements Runnable {
     @Override
     public void run() {
         while (true) {
-            server.sendMessageAll("Новый участник в чате");
+            server.sendMessageAll("Новый участник в чате!");
             server.sendMessageAll("В чате " + clientCount + " человек(а)");
-
             break;
         }
 
@@ -35,11 +34,11 @@ public class ClientThread implements Runnable {
             try {
                 outWriter.write(clientMessage + "\n");
                 outWriter.flush();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (IOException ignored) {
             }
             try {
                 while (true) {
+                    clientMessage = inReader.readLine();
                     if (clientMessage.equals(null)) {
                         this.clientExit();
                         break;
@@ -47,11 +46,16 @@ public class ClientThread implements Runnable {
                     System.out.println(clientMessage);
                     server.sendMessageAll(clientMessage);
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (NullPointerException ignored) {
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                this.clientExit();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

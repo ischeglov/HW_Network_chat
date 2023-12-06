@@ -22,7 +22,7 @@ class ServerConfigTest {
     @DisplayName("Тест получения порта")
     void getPort() {
         ServerConfig serverConfig = new ServerConfig();
-        int port = 49081;
+        int port = 49087;
 
         int result = serverConfig.getPort();
         Assertions.assertEquals(result, port);

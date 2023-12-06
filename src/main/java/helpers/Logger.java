@@ -8,11 +8,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Logger {
 
-    File file = new File("/Users/imshcheglov/Desktop/JD-51 HW/7. Многопоточное и функциональное программирование/6. Курсовой проект \"Сетевой чат\"/HW_Network_chat", "file.log");
-
     public static final Logger instance = new Logger();
 
     private Logger() {}
+
+    File file = new File("/Users/imshcheglov/Desktop/ivan_mix/HW_Network_chat/", "file.log");
 
     public void setMessage(String message) {
         System.out.println("[ " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + " ] " + message);

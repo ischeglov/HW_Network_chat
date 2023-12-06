@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Server {
 
-    public static final Integer LOCALHOST_PORT = 49081;
+    public static final Integer LOCALHOST_PORT = 49087;
 
     private ArrayList<ClientThread> clients = new ArrayList<>();
 
@@ -19,7 +19,6 @@ public class Server {
 
         try {
             serverSocket = new ServerSocket(LOCALHOST_PORT);
-            System.out.println("Чат запущен");
             Logger.instance.setMessage("Добро пожаловать в чат!");
             while (true) {
                 clientSocket = serverSocket.accept();
